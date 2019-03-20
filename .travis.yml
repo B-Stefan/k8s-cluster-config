@@ -33,7 +33,6 @@ jobs:
     - export HELM_HOST=127.0.0.1:44134
     - helm dependency update chart
     - helm dependency build chart
-    - echo "Namespace: $NAMESPACE"
     - helm upgrade
       --install
       --wait
