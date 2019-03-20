@@ -3,7 +3,7 @@ nginx-ingress:
   controller:
     service:
       type: NodePort
-      externalTrafficPolicy: local
+      externalTrafficPolicy: Local
       nodePorts:
         http: 80
         https: 443
