@@ -1,0 +1,36 @@
+nginx-ingress:
+  enabled: true
+  controller:
+    replicaCount: 2
+    stats:
+      enabled: true
+      service:
+        annotations:
+          prometheus.io/scrape: true
+          prometheus.io/port: "10254"
+    metrics:
+      enabled: true
+      service:
+        annotations:
+          prometheus.io/scrape: true
+          prometheus.io/port: "10254"
+cert-manager:
+  enabled: true
+  ingressShim:
+    defaultIssuerName: letsencrypt-prod
+    defaultIssuerKind: ClusterIssuer
+kubed:
+  enabled: true
+  apiserver:
+    enabled: false
+  # Only need for config syncer
+  enableConfigSyncer:
+    enabled: true
+
+reloader:
+  enabled: true
+
+releaseOverride: ""
+application:
+  track: ""
+  tier: ""

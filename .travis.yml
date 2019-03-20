@@ -1,0 +1,45 @@
+sudo: required
+services:
+- docker
+stages:
+- deploy
+jobs:
+  include:
+  - stage: deploy
+    branches:
+      only:
+      - master
+    before_install:
+    - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s
+      https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+    - chmod +x ./kubectl
+    - sudo mv ./kubectl /usr/local/bin/kubectl
+    - curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get >
+      get_helm.sh
+    - chmod 700 get_helm.sh
+    - sudo ./get_helm.sh
+    - helm plugin install https://github.com/rimusz/helm-tiller
+    - helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubator
+    - helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+    - helm repo add stakater https://stakater.github.io/stakater-charts
+    - helm repo add appscode https://charts.appscode.com/stable/
+    script:
+    - mkdir ~/.kube
+    - openssl aes-256-cbc -K $encrypted_64bb7977dcc7_key -iv $encrypted_64bb7977dcc7_iv
+      -in .kube/config.enc -out ~/.kube/config -d
+    - helm init --tiller-namespace=$NAMESPACE --upgrade
+    - helm tiller start
+    - helm dependency update .chart
+    - helm dependency build .chart
+    - helm upgrade --install --wait --force --set releaseOverride=$RELEASE_NAME --set
+      application.track="stable" --namespace=$NAMESPACE --tiller-namespace=$NAMESPACE
+      $RELEASE_NAME .chart
+    - helm status
+    - helm ls
+env:
+  global:
+  - NAMESPACE="k8s-cluster-config"
+  - RELEASE_NAME="production"
+before_install:
+- openssl aes-256-cbc -K $encrypted_64bb7977dcc7_key -iv $encrypted_64bb7977dcc7_iv
+  -in config.enc -out ./init-cluster/config -d

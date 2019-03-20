@@ -1,0 +1,17 @@
+dependencies:
+  - name: kubed
+    version: "0.8.0"
+    repository: "@appscode"
+    condition: kubed.enabled
+  - name: nginx-ingress
+    version: "1.1.5"
+    repository: "@stable"
+    condition: nginx-ingress.enabled
+  - name: cert-manager
+    version: "v0.4.1"
+    repository: "@stable"
+    condition: cert-manager.enabled
+  - name: reloader
+    version: "v0.0.22"
+    repository: "@stakater"
+    condition: reloader.enabled
