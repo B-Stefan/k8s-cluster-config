@@ -12,7 +12,9 @@ nginx-ingress:
     service:
       externalTrafficPolicy: Local
       loadBalancerIP: "165.227.247.136"
-
+      nodePorts:
+        http: 80
+        https: 443
     replicaCount: 2
     stats:
       enabled: true
