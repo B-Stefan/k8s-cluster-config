@@ -29,8 +29,8 @@ jobs:
     - openssl aes-256-cbc -K $encrypted_64bb7977dcc7_key -iv $encrypted_64bb7977dcc7_iv
       -in .kube/config.enc -out ~/.kube/config -d
     - helm tiller start $NAMESPACE &
-    - helm dependency update .chart
-    - helm dependency build .chart
+    - helm dependency update chart
+    - helm dependency build chart
     - helm upgrade --install --wait --force --set releaseOverride=$RELEASE_NAME --set
       application.track="stable" --namespace=$NAMESPACE --tiller-namespace=$NAMESPACE
       $RELEASE_NAME chart
