@@ -10,8 +10,8 @@ nginx-ingress:
   enabled: true
   controller:
     service:
-      type: NodePort
       externalTrafficPolicy: Local
+      loadBalancerIP: "165.227.247.136"
 
     replicaCount: 2
     stats:
