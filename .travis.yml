@@ -33,14 +33,21 @@ jobs:
     - export HELM_HOST=127.0.0.1:44134
     - helm dependency update chart
     - helm dependency build chart
-    - helm upgrade --install --wait --force --set releaseOverride=$RELEASE_NAME --set
-      application.track="stable" --namespace=$NAMESPACE --tiller-namespace=$NAMESPACE
+    - echo "Namespace: $NAMESPACE"
+    - helm upgrade
+      --install
+      --wait
+      --force
+      --set releaseOverride="$RELEASE_NAME"
+      --set application.track="stable"
+      --namespace=$NAMESPACE
+      --tiller-namespace=$NAMESPACE
       $RELEASE_NAME chart
-    - helm status --tiller-namespace=$NAMESPACE
+    - helm status --tiller-namespace=$NAMESPACE $RELEASE_NAME
     - helm ls --tiller-namespace=$NAMESPACE
     - helm tiller stop
 
 env:
   global:
-  - NAMESPACE="k8s-cluster-config"
+  - NAMESPACE=k8s-cluster-config
   - RELEASE_NAME="production"
