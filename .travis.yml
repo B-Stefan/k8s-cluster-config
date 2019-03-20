@@ -27,7 +27,6 @@ jobs:
     - mkdir ~/.kube
     - openssl aes-256-cbc -K $encrypted_64bb7977dcc7_key -iv $encrypted_64bb7977dcc7_iv
       -in .kube/config.enc -out ~/.kube/config -d
-    - helm init --tiller-namespace=$NAMESPACE --upgrade
     - helm tiller start
     - helm dependency update .chart
     - helm dependency build .chart
@@ -40,6 +39,3 @@ env:
   global:
   - NAMESPACE="k8s-cluster-config"
   - RELEASE_NAME="production"
-before_install:
-- openssl aes-256-cbc -K $encrypted_64bb7977dcc7_key -iv $encrypted_64bb7977dcc7_iv
-  -in config.enc -out ./init-cluster/config -d
