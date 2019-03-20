@@ -33,9 +33,9 @@ jobs:
     - helm dependency build .chart
     - helm upgrade --install --wait --force --set releaseOverride=$RELEASE_NAME --set
       application.track="stable" --namespace=$NAMESPACE --tiller-namespace=$NAMESPACE
-      $RELEASE_NAME .chart
-    - helm status
-    - helm ls
+      $RELEASE_NAME chart
+    - helm status --tiller-namespace=$NAMESPACE
+    - helm ls --tiller-namespace=$NAMESPACE
 env:
   global:
   - NAMESPACE="k8s-cluster-config"
