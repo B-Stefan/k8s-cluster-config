@@ -40,8 +40,8 @@ jobs:
       --force
       --set releaseOverride="$RELEASE_NAME"
       --set application.track="stable"
-      --namespace=$NAMESPACE
-      --tiller-namespace=$NAMESPACE
+      --namespace $NAMESPACE
+      --tiller-namespace $NAMESPACE
       $RELEASE_NAME chart
     - helm status --tiller-namespace=$NAMESPACE $RELEASE_NAME
     - helm ls --tiller-namespace=$NAMESPACE
