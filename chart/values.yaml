@@ -5,7 +5,7 @@ metallb:
       - name: default
         protocol: layer2
         addresses:
-          - 165.227.247.136/32
+          - 157.230.79.185/32
           - 104.248.39.202/32
 nginx-ingress:
   enabled: true
