@@ -1,10 +1,11 @@
 metallb:
   enabled: true
-  address-pools:
-    - name: default
-      protocol: layer2
-      addresses:
-        - 165.227.247.136/32
+  config:
+    address-pools:
+      - name: default
+        protocol: layer2
+        addresses:
+          - 165.227.247.136/32
 nginx-ingress:
   enabled: true
   controller:
