@@ -1,6 +1,6 @@
 metallb:
   enabled: true
-  config:
+  configInline:
     address-pools:
       - name: default
         protocol: layer2
