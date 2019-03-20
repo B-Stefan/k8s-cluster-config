@@ -3,6 +3,11 @@ nginx-ingress:
   controller:
     service:
       type: NodePort
+      externalTrafficPolicy: local
+      nodePorts:
+        http: 80
+        https: 443
+
     replicaCount: 2
     stats:
       enabled: true
