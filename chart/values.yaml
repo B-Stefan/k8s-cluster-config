@@ -1,12 +1,16 @@
+metallb:
+  enabled: true
+  address-pools:
+    - name: default
+      protocol: layer2
+      addresses:
+        - 165.227.247.136/32
 nginx-ingress:
   enabled: true
   controller:
     service:
       type: NodePort
       externalTrafficPolicy: Local
-      nodePorts:
-        http: 80
-        https: 443
 
     replicaCount: 2
     stats:

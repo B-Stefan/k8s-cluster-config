@@ -1,4 +1,8 @@
 dependencies:
+  - name: metallb
+    version: "0.5.0"
+    repository: "@stable"
+    condition: metallb.enabled
   - name: kubed
     version: "0.8.0"
     repository: "@appscode"
