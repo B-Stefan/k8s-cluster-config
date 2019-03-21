@@ -5,14 +5,13 @@ metallb:
       - name: default
         protocol: layer2
         addresses:
-          - 157.230.79.185/32
-          - 104.248.39.202/32
+          - 116.203.119.32/32
 nginx-ingress:
   enabled: true
   controller:
     service:
       externalTrafficPolicy: Local
-      loadBalancerIP: "157.230.79.185"
+      loadBalancerIP: "116.203.119.32"
     replicaCount: 2
     stats:
       enabled: true
